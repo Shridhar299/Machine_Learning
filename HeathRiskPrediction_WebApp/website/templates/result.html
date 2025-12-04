@@ -1,0 +1,42 @@
+{% extends "disease_page.html" %}
+{% block page %}
+  
+  <br><br><br><br><br><br>
+  <h2 class="pt-10 text-center">{{page}}s Disease Prediction</h2>
+
+  <div style="width: 90%; margin: auto; text-align: center">
+  	{% if prediction == 0 %}
+      <img src="./static/images/happy.jpg" style="max-width: 500px; max-height: 450px; margin-top: 30px; margin-bottom: 20px">
+      <p style="font-style: italic; font-size: 20px">No need to fear. You have no dangerous symptoms of the {{page}}s disease</p>
+
+    {% elif prediction == 1 %}
+      <img src="./static/images/sad.png" style="max-width: 500px; max-height: 450px; margin-top: 30px; margin-bottom: 20px">
+      <p style="font-style: italic; font-size: 20px">Sorry, it seems that you are at risk of developing {{page}} disease</p>
+
+      {% if risky_features %}
+        <h4 style="color:red">⚠️ Risky Parameters:</h4>
+        <ul style="list-style-type: none;">
+          {% for feature in risky_features %}
+            <li><b>{{ feature }}</b></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if suggestions %}
+        <h4 style="color:green">✅ Suggestions:</h4>
+        <ul style="text-align: left; max-width: 600px; margin: auto;">
+          {% for suggestion in suggestions %}
+            <li>{{ suggestion }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+    {% endif %}
+
+    <div class="prediction text-center" style="margin-top: 30px;">
+      <a href="/" class="smoothScroll btn btn-success wow fadeInDown">Back Home</a>
+    </div>
+  </div>
+  <br><br><br>
+
+{% endblock %}
